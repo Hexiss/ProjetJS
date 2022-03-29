@@ -35,11 +35,10 @@ app.post("/postMeuble", (req, res) => {
 
 });
 
-// Retourner un meuble
+// Retourner tous les meubles
 app.get("/getMeubles", (req, res) => {
     return res.status(201).json(meubles);
 });
-
 
 // Retourner un meuble par ID
 app.get("/getMeublesById/:id", (req, res) => {
