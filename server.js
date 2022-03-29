@@ -11,7 +11,6 @@ app.use(express.json());
 
 server.listen(PORT, () => console.log("Seveur allumé"))
 
-
 const meubles = [
     { id: 0, name: "Mini table apéro" },
     { id: 1, name: "canapé XXL RGB aux couleurs de la France" },
