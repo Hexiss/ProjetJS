@@ -7,9 +7,10 @@ const server = createServer(app);
 const PORT = 3000;
 const io = new Server(server);
 
+app.use(express.json());
+
 server.listen(PORT, () => console.log("Seveur allumé"))
 
-app.use(express.json());
 
 const meubles = [
     { id: 0, name: "Mini table apéro" },
@@ -29,6 +30,7 @@ app.post("/postMeuble", (req, res) => {
         meubles.push({"id": id++, "name": name});
 
         return res.status(201).json(meubles);
+
     } catch (error) {
           return res.status(500).json("error:" + error);
     }
