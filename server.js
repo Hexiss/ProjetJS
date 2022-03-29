@@ -7,6 +7,8 @@ const server = createServer(app);
 const PORT = 3000;
 const io = new Server(server);
 
+server.listen(PORT, () => console.log("Seveur allumé"))
+
 app.use(express.json());
 
 const meubles = [
@@ -49,7 +51,7 @@ app.get("/getMeublesById/:id", (req, res) => {
         if(currentMeuble) {
             return res.status(201).json(currentMeuble);
         } else {
-            return res.status(201).json("Meuble not found");
+            return res.status(201).json("Meuble non trouvé");
         }
 
     } catch(error) {
@@ -70,7 +72,7 @@ app.put("/updateMeubleById/:id", (req, res) => {
             meubles[index].name = name;
             return res.status(201).json(meubles);
         } else {
-            return res.status(201).json("Meuble not found");
+            return res.status(201).json("Meuble non trouvé");
         }
 
     } catch(error) {
@@ -90,12 +92,10 @@ app.delete("/deleteMeubleById/:id", (req, res) => {
             meubles.splice(index, 1);
             return res.status(201).json(meubles);
         } else {
-            return res.status(201).json("Meuble not found");
+            return res.status(201).json("Meuble non trouvé");
         }
 
     } catch(error) {
         return res.status(500).json("error:" + error);
     }
 });
-
-server.listen(PORT, () => console.log("Seveur allumé"))
