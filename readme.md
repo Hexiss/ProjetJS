@@ -9,8 +9,8 @@ Ajouter un meuble. Supprimer un meuble. Modifier la quantitée disponible.
 
 Lancer le projet :
 
-> npm i /n
-> node server.js
+> "npm i"
+> "node server.js"
 
 
 A revoir: 
@@ -39,3 +39,9 @@ http://localhost:3000/getMeubles
 PUT : 
 http://localhost:3000/updateMeubleById/IdDuMeubleChoisi
 code json: {"name": "meuble test2" }
+
+----------- Partie discord -----------
+
+Lancer le projet discord:
+
+> "node discord.js"
