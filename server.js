@@ -1,27 +1,37 @@
-const { Server } = require('socket.io');
-const express = require('express');
-const app = express();
-const { createServer } = require('http');
-const server = createServer(app);
+'use strict';
 
+const fastify = require('fastify')({ logger: true });
+const { connect } = require('mongoose');
+
+//Use cloud
+//let databaseUrl = 'mongodb+srv://yolo:yolo@cluster0.0jc8g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+
+//Use local storage
+let databaseUrl = 'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false'
+connect(databaseUrl).catch(err =>console.error(err));
 const PORT = 3000;
-const io = new Server(server);
 
-app.use(express.json());
+fastify.register(require('fastify-helmet'));
+fastify.register(require('./routes/myAppR'), { prefix: '/v1/myApp' });
 
-server.listen(PORT, () => console.log("Seveur allumé"))
+fastify.get('/', async () => { return { msg: "Hello World" }});
 
-const meubles = [
-    { id: 0, name: "Mini table apéro" },
-    { id: 1, name: "canapé XXL RGB aux couleurs de la France" },
-    { id: 2, name: "Bureau gamer" },
-    { id: 3, name: "Chaise en bois douteux" }
-]
+// Run the server!
+const start = async () => {
+    try {
+    await fastify.listen(PORT, '0.0.0.0');
+    console.log(fastify.printRoutes());
+    } catch (err) {
+    fastify.log.error(err);
+    process.exit(1);
+    }
+   }
+   start();
 
 let id = 0;
 
 // Ajouter un meuble
-app.post("/postMeuble", (req, res) => {
+fastify.post("/postMeuble", (req, res) => {
     let name = req.body.name;
     console.log(req.body);
 
@@ -37,12 +47,12 @@ app.post("/postMeuble", (req, res) => {
 });
 
 // Retourner tous les meubles
-app.get("/getMeubles", (req, res) => {
+fastify.get("/getMeubles", (req, res) => {
     return res.status(201).json(meubles);
 });
 
 // Retourner un meuble par ID
-app.get("/getMeublesById/:id", (req, res) => {
+fastify.get("/getMeublesById/:id", (req, res) => {
     let meubleId = req.params.id;
 
     try {
@@ -60,7 +70,7 @@ app.get("/getMeublesById/:id", (req, res) => {
 });
 
 // Modifier les refs d'un meuble
-app.put("/updateMeubleById/:id", (req, res) => {
+fastify.put("/updateMeubleById/:id", (req, res) => {
     let meubleId = req.params.id;
 
     let name = req.body.name;
@@ -82,7 +92,7 @@ app.put("/updateMeubleById/:id", (req, res) => {
 
 
 // Supprimer un meuble
-app.delete("/deleteMeubleById/:id", (req, res) => {
+fastify.delete("/deleteMeubleById/:id", (req, res) => {
     let meubleId = req.params.id;
 
     try {
