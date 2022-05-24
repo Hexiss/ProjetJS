@@ -9,7 +9,7 @@ Ajouter un meuble. Supprimer un meuble. Modifier la quantitée disponible.
 
 Lancer le projet :
 
-> npm i
+> npm i /n
 > node server.js
 
 
