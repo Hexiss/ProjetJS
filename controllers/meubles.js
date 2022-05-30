@@ -28,7 +28,7 @@ async function getMeubles (req, res) {
 }
 
 // Retourner un meuble par ID
-async function getMeubles (req, res) {
+async function getMeublesById (req, res) {
     fastify.get("/getMeublesById/:id", (req, res) => {
         let meubleId = req.params.id;
     
@@ -48,7 +48,7 @@ async function getMeubles (req, res) {
 }
 
 // Modifier les refs d'un meuble
-async function getMeubles (req, res) {
+async function updateMeubleById (req, res) {
     fastify.put("/updateMeubleById/:id", (req, res) => {
         let meubleId = req.params.id;
     
@@ -71,7 +71,7 @@ async function getMeubles (req, res) {
 }
 
 // Supprimer un meuble
-async function getMeubles (req, res) {
+async function deleteMeubleById (req, res) {
     fastify.delete("/deleteMeubleById/:id", (req, res) => {
         let meubleId = req.params.id;
     

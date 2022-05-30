@@ -27,5 +27,3 @@ const start = async () => {
     }
    }
    start();
-
-let id = 0;
