@@ -1,4 +1,5 @@
 'use strict';
+
 const getAllV = {
 };
 const getOneV = {
@@ -9,6 +10,7 @@ const UpdateV = {
 };
 const DeleteV = {
 };
+
 module.export = {
 getAllV,
 getOneV,
